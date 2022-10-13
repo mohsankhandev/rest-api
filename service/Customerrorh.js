@@ -1,9 +1,9 @@
 class Customerrorh extends Error{
 
-    constructor(status,mesg){
+    constructor(status,message){
         super();
-        this.status=status;
-        this.mesg=mesg;
+        this.status = status;
+        this.message = message;
 
 
     }
@@ -13,7 +13,7 @@ class Customerrorh extends Error{
 
     };
 
-    static wrongCretutanal( message = "username or email is wrong!"){
+    static wrongCretutanal(message ="username or email is wrong!"){
         return  new Customerrorh(401,message)
 
     }

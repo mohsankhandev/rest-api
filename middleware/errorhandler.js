@@ -32,6 +32,8 @@ const errorhandlor = (err)=>{
     // ya jo error mill rahi wo ValidationError es classka instance ha kia 
     //ya joi libarary hama da g 
 };
+
+
 if(err instanceof Customerrorh){
 
     stauscode = err.status;

@@ -6,6 +6,7 @@ import Jwtservice from "../service/jwtservice";
 //E:\appppp\Node Js Course B\rest-api\node_modules\bcrypt
 
 
+
 const loginController={
 
    async login(req,res,next){
@@ -25,14 +26,16 @@ const loginController={
         const   user = await User.findOne({email: req.body.email  })
 
         if (!user){
-            return next(Customerrorh.wrongCretutanal())
+            return next(Customerrorh.wrongCretutanal("passwor or email is incorrect "))
         }
          console.log(user)
         //if useer here in db now compare password
-       const match = bcrypt.compare(req.body.password ,user.password )
+        console.log(user.password)
+        console.log(req.body.password)
+       const match = await bcrypt.compare(req.body.password, user.password )
 
        if (!match){
-        return next(Customerrorh.wrongCretutanal())
+        return next(Customerrorh.wrongCretutanal("passwor or email is incorrect "))
          }
 
          //token generate 
