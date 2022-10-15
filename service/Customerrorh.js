@@ -16,6 +16,16 @@ class Customerrorh extends Error{
     static wrongCretutanal(message ="username or email is wrong!"){
         return  new Customerrorh(401,message)
 
+    };
+
+    static unauthorized(message ="unautorized token send to data base "){
+        return  new Customerrorh(401,message)
+
+    }
+
+    static ntfound(message ="user not found "){
+        return  new Customerrorh(404,message)
+
     }
 }
 

@@ -3,6 +3,10 @@ import User from "../model/User";
 import Customerrorh from "../service/customerrorh";
 import bcrypt from 'bcrypt'
 import Jwtservice from "../service/jwtservice";
+import refreshtoken from "../model/refresh";
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 //import {Jwtservice} from '../service/Jwtservice'
 
@@ -12,8 +16,10 @@ import Jwtservice from "../service/jwtservice";
 
 
 const registercontroller={
+    
 
  async   register(req,res, next ) {
+    
     
 
         //validating schema 
@@ -55,6 +61,7 @@ const registercontroller={
         //hash password 
       const hasspassword = await bcrypt.hash(req.body.password, 10)
       const {name,email,password}=req.body;
+      
       const user = new User(
         {
             name,
@@ -65,16 +72,26 @@ const registercontroller={
 
       //save into db 
       let accetoken
+      let rftoken
+      
       try {
           const result  = await user.save();
-          //token create 
+          //token create JWTre_Service
            accetoken =Jwtservice.sign({_id : result._id ,role: result.role})
-           console.log(`hello its from register  ${accetoken}`)
-      } catch (error) {
+           rftoken =Jwtservice.sign({_id : result._id ,role: result.role},'1y',process.env.JWTRF_Service)
+           //white list in data base this refreh token
+           
+          
+          await refreshtoken.create({token:rftoken})  
+
+           console.log(`hello its from register  ${accetoken}  ${rftoken}` )
+      } 
+      
+      catch (error) {
         return next(error   )
       }
 
-        res.json({accetoken:accetoken})
+        res.json({accetoken:accetoken,rftoken:rftoken})
 
     }
 }
