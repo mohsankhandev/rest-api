@@ -1,5 +1,5 @@
 // import { string } from "joi";
-// import mongoose from "mongoose";
+ //import mongoose from "mongoose";
 
  
 // const schema = mongoose.Schema;
@@ -26,9 +26,9 @@
 // export default Usersd;
 
 
-const mongoose=require('mongoose')
+import { Schema, model } from 'mongoose';
 
-const refrshschema= new mongoose.Schema({
+const refrshschema= new Schema({
 
     token: {
         type: String,
@@ -37,6 +37,6 @@ const refrshschema= new mongoose.Schema({
 
 },{timestamps:false})
 
-const refreshtoken= mongoose.model('refreshtoken', refrshschema )
+const refreshtoken= model('refreshtoken', refrshschema )
 
-module.exports = refreshtoken;
+export default refreshtoken;

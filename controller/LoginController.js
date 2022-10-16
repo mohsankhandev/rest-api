@@ -26,7 +26,7 @@ const loginController={
         const   user = await User.findOne({email: req.body.email  })
 
         if (!user){
-            return next(Customerrorh.wrongCretutanal("passwor or email is incorrect "))
+            return next(Customerrorh.wrongCretutanal("email is incorrect "))
         }
          console.log(user)
         //if useer here in db now compare password
@@ -35,7 +35,7 @@ const loginController={
        const match = await bcrypt.compare(req.body.password, user.password )
 
        if (!match){
-        return next(Customerrorh.wrongCretutanal("passwor or email is incorrect "))
+        return next(Customerrorh.wrongCretutanal("please enter correct password "))
          }
 
          //token generate 

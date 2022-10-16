@@ -1,38 +1,30 @@
 import {ValidationError} from 'joi'
 import Customerrorh from '../service/customerrorh';
+
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 
-const errorhandlor = (err)=>{
+const errorhandlor = (err,req,res,next)=>{
 
-    const stauscode= 500;
+    let stauscode = 510;
     let data ={
         message: "internal server error ",
-        ...(process.env.DEBUG_MODE === true  && {originalerror: err.message})
-        // agar DEBUG_MODE true huwa to aga ki condition run hu g 
-        // originalerror: err.message
+       // ...(process.env.DEBUG_MODE === true  && {originalerror: err.message})
+        
     };
 
-    //chk lgaya ha jo erro 
-
-    if (err instanceof ValidationError){
-
-        stauscode = 422;
-        data ={
-            message: err.message
-        }
-
-//        stauscode = 422; validation error code   over ride kar raha opar wala status 
+    
 
 
-     //ValidationError ya ek class ha interface ha    
-    //jo object recieve hu raha wokissclassya function ka ha instanceof 
-    // ya jo error mill rahi wo ValidationError es classka instance ha kia 
-    //ya joi libarary hama da g 
-};
+if (err instanceof ValidationError){
 
+    stauscode = 422;
+    data ={
+        message: err.message
+    }
+}
 
 if(err instanceof Customerrorh){
 
@@ -41,7 +33,8 @@ if(err instanceof Customerrorh){
         message: err.message
     }
 }
-return res.status(stauscode).json({data})
+
+return res.status(stauscode).json(data)
 
 
 };
