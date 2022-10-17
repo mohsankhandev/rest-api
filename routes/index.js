@@ -12,6 +12,8 @@ router.post('/login' , loginController.login);
 
 router.get('/me' ,auth, UserController.me);
 router.post('/refresh' , RefreshController.refresh);
+router.post('/logout' ,auth, loginController.logout);
+
 
 
 

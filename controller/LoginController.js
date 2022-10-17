@@ -3,6 +3,7 @@ import User from "../model/User";
 import Customerrorh from "../service/customerrorh";
 import bcrypt from 'bcrypt'
 import Jwtservice from "../service/jwtservice";
+import refreshtoken from "../model/refresh";
 //E:\appppp\Node Js Course B\rest-api\node_modules\bcrypt
 
 
@@ -51,7 +52,36 @@ const loginController={
         
     }
 
+    },
+    //loging method end
+    //logout start
+    async logout(req,res,next){
+
+        //validayion 
+        const refreshschema = Joi.object({
+            rftoken: Joi.string(),
+        });
+        //errror agar aya 
+        const { error } = refreshschema.validate(req.body)
+        console.log("logout line 66 ",req.body)
+
+        if (error) {
+            return next(error)
+        }
+
+        //after validatin 
+        try {
+
+       await refreshtoken.deleteOne({token: req.body.rftoken});
+
+        } catch (error) {
+            return next(new error("data base somt thing rong"))
+        }
+
+        res.json({status:1})
+
     }
+    
 }
 
 export default loginController;
