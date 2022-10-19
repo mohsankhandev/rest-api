@@ -6,5 +6,7 @@ add new product
     hello 
     ilove 
     its mohsan branch 
+image upload rest api is completes and working and commit id "multer is completed"
 
-    how am  i   
+
+

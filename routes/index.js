@@ -1,5 +1,6 @@
 import  express  from "express";
 import loginController from "../controller/LoginController";
+import ProductController from "../controller/ProductController";
 import RefreshController from "../controller/RefreshController";
 import registercontroller from "../controller/registercontroller";
 import UserController from "../controller/UserController";
@@ -12,7 +13,9 @@ router.post('/login' , loginController.login);
 
 router.get('/me' ,auth, UserController.me);
 router.post('/refresh' , RefreshController.refresh);
-router.post('/logout' ,auth, loginController.logout);
+router.post('/logout' ,auth, loginController.logout);  
+router.post('/product' , ProductController.store); 
+
 
 
 

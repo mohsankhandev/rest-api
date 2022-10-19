@@ -27,6 +27,12 @@ class Customerrorh extends Error{
         return  new Customerrorh(404,message)
 
     }
+
+    
+    static server(message ="server error "){
+        return  new Customerrorh(404,message)
+
+    }
 }
 
 export default Customerrorh;

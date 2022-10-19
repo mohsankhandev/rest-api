@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import errorhandlor from "./middleware/errorhandler";
 import router from "./routes";
 import dotenv from 'dotenv';
+import path from 'path'
 
 dotenv.config();
 
@@ -22,7 +23,8 @@ db.once('open',()=>{
 
 
 
-
+global.appRoute = path.resolve(__dirname);
+app.use(express.urlencoded({extended:false}))
 //json ku acept kar raha jo client sa a raha 
 app.use(express.json())
 //route ku applicatin kaanadar registerkarna hota ha 
