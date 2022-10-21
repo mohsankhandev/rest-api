@@ -1,6 +1,7 @@
 
-import mongoose from 'mongoose'
-const { required } = require('nodemon/lib/config')
+import mongoose, { get } from 'mongoose'
+const { required } = require('nodemon/lib/config');
+import dotenv from 'dotenv'
 
 const Pdoductschema= new mongoose.Schema({
 
@@ -20,12 +21,17 @@ const Pdoductschema= new mongoose.Schema({
 
     image:{
         type:String,
-        required:true
+        required:true,
+        get: (image)=>{
+        // convert into url attach our domain name     uploads\1666188511706.png
+         return `${process.env.APP_URL_IMG}/${image}`
+
+        }
 
     },
 
 
-},{timestamps:true})
+},{timestamps:true , toJSON : {getters : true} , id: false})
 
 const Product= mongoose.model('Product', Pdoductschema )
 export default  Product;

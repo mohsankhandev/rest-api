@@ -19,7 +19,7 @@ const auth = async (req, res, next) => {
     //agar header to code yaha aya ga c
     //.split() ya method string ku splite karti ha alag alag  or us ku array mastore karti ha
     const token = authheader.split(" ")[1];
-    console.log(token)
+    console.log("token coming from line 22 auth.js",token)
 
     try {
 
@@ -29,7 +29,10 @@ const auth = async (req, res, next) => {
             _id,
             role,
         }
+        
         req.user = user;
+
+        console.log("auth line 34",req.user)
 
         next()
 

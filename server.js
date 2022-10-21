@@ -22,14 +22,15 @@ db.once('open',()=>{
 
 
 
-
 global.appRoute = path.resolve(__dirname);
+
 app.use(express.urlencoded({extended:false}))
 //json ku acept kar raha jo client sa a raha 
 app.use(express.json())
 //route ku applicatin kaanadar registerkarna hota ha 
 app.use('/api', router);
 
+app.use('/uploads', express.static('uploads'))
 //es ku app.listen ka opar h register karta ha 
 app.use(errorhandlor);
 
